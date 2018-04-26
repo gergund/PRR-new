@@ -35,6 +35,23 @@ class MageInfo
 
         return ''.$mageversion.' '.$magedistr;
 
+    }
+
+    public function getSession($magedir)
+    {
+        $file = $magedir.'/app/etc/env.php';
+
+        if (!is_file($file) || !is_readable($file)) {
+            return 'Unknown';
+        }
+
+        $mage_conf=require($file);
+
+        if ($mage_conf['session']['save'] == 'redis'){
+            return 'Redis';
+        }else{
+
+        }
 
 
     }

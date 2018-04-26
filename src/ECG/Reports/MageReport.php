@@ -23,7 +23,7 @@ class MageReport
 
         $magedir = $input->getOption('magento-dir');
         $version = $mage_info->getVersion($magedir);
-
+        $session = $mage_info->getSession($magedir);
 
 
         $output->writeln('');$output->writeln('');
@@ -31,6 +31,7 @@ class MageReport
 
         $table = new Table($output);
         $table->addRow(['Magento Version', $version]);
+        $table->addRow(['Session storage', $session]);
 
 
         $table->render();
