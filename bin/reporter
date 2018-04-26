@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: User
+ * Date: 27.12.2015
+ * Time: 13:50
+ */
+
+set_time_limit(0);
+date_default_timezone_set('Europe/Kiev');
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use ECG\Commands\CollectCommand;
+
+$app = new Application();
+$app->add(new CollectCommand() );
+$app->run();

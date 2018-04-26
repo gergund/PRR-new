@@ -1,0 +1,13 @@
+{
+    "name": "ECG/PRR",
+    "description": "Performance Review Report tool ",
+    "require": {
+        "symfony/console": "^3.0",
+        "macfja/phar-builder": "^0.2.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
