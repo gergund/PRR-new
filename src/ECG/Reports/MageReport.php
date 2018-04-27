@@ -22,8 +22,11 @@ class MageReport
         $mage_info = new MageInfo();
 
         $magedir = $input->getOption('magento-dir');
+
         $version = $mage_info->getVersion($magedir);
         $session = $mage_info->getSession($magedir);
+        $cache = $mage_info->getCache($magedir);
+        $pagecache = $mage_info->getPageCache($magedir);
 
 
         $output->writeln('');$output->writeln('');
@@ -32,6 +35,8 @@ class MageReport
         $table = new Table($output);
         $table->addRow(['Magento Version', $version]);
         $table->addRow(['Session storage', $session]);
+        $table->addRow(['Cache storage', $cache]);
+        $table->addRow(['Page Cache Storage', $pagecache]);
 
 
         $table->render();

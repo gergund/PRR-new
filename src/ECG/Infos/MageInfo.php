@@ -49,10 +49,56 @@ class MageInfo
 
         if ($mage_conf['session']['save'] == 'redis'){
             return 'Redis';
+        }elseif ($mage_conf['session']['save'] == 'files'){
+            return 'Files';
         }else{
+            return 'Unknown';
+        }
+    }
 
+    public function getCache($magedir)
+    {
+        $file = $magedir.'/app/etc/env.php';
+
+        if (!is_file($file) || !is_readable($file)) {
+            return 'Unknown';
         }
 
+        $mage_conf=require($file);
+
+        if (isset($mage_conf['cache']['frontend']['default']['backend'])) {
+
+            if ($mage_conf['cache']['frontend']['default']['backend'] == 'Cm_Cache_Backend_Redis') {
+                return 'Redis';
+            } else {
+                return 'Unknown';
+            }
+        }else{
+            return 'Files';
+        }
+
+    }
+
+    public function getPageCache($magedir)
+    {
+        $file = $magedir.'/app/etc/env.php';
+
+        if (!is_file($file) || !is_readable($file)) {
+            return 'Unknown';
+        }
+
+        $mage_conf=require($file);
+
+        if (isset($mage_conf['cache']['frontend']['page_cache']['backend'])) {
+
+            if ($mage_conf['cache']['frontend']['page_cache']['backend'] == 'Cm_Cache_Backend_Redis') {
+                return 'Redis';
+            } else {
+                return 'Unknown';
+            }
+        }else {
+            return 'Files';
+        }
 
     }
 }
