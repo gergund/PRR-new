@@ -15,6 +15,8 @@ use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Symfony\Component\Console\Helper\TableSeparator;
+
 class MageReport
 {
     public function PrepareReport(InputInterface $input, OutputInterface $output){
@@ -27,7 +29,8 @@ class MageReport
         $session = $mage_info->getSession($magedir);
         $cache = $mage_info->getCache($magedir);
         $pagecache = $mage_info->getPageCache($magedir);
-
+        $cachetype = $mage_info->getCacheType($magedir);
+        //$cachetype = array('config'=>1,'layout'=>1);
 
         $output->writeln('');$output->writeln('');
         $output->writeln('Magento Parameters Table:');
@@ -38,6 +41,27 @@ class MageReport
         $table->addRow(['Cache storage', $cache]);
         $table->addRow(['Page Cache Storage', $pagecache]);
 
+        $table->render();
+
+        $output->writeln('');$output->writeln('');
+        $output->writeln('Cache Types Settings:');
+
+        $table = new Table($output);
+        $table->addRow(['config',$cachetype['config']]);
+        $table->addRow(['layout',$cachetype['layout']]);
+        $table->addRow(['block_html',$cachetype['block_html']]);
+        $table->addRow(['collections',$cachetype['collections']]);
+        $table->addRow(['reflection',$cachetype['reflection']]);
+        $table->addRow(['db_ddl',$cachetype['db_ddl']]);
+        $table->addRow(['eav',$cachetype['eav']]);
+        $table->addRow(['customer_notification',$cachetype['customer_notification']]);
+        $table->addRow(['config_integration',$cachetype['config_integration']]);
+        $table->addRow(['config_integration_api',$cachetype['config_integration_api']]);
+        $table->addRow(['target_rule',$cachetype['target_rule']]);
+        $table->addRow(['full_page',$cachetype['full_page']]);
+        $table->addRow(['translate',$cachetype['translate']]);
+        $table->addRow(['config_webservice',$cachetype['config_webservice']]);
+        $table->addRow(['compiled_config',$cachetype['compiled_config']]);
 
         $table->render();
     }

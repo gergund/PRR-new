@@ -101,4 +101,17 @@ class MageInfo
         }
 
     }
+
+    public function getCacheType($magedir)
+    {
+        $file = $magedir.'/app/etc/env.php';
+
+        if (!is_file($file) || !is_readable($file)) {
+            return 'Unknown';
+        }
+
+        $mage_conf=require($file);
+
+        return $mage_conf['cache_types'];
+    }
 }
