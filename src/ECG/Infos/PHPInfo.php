@@ -30,4 +30,31 @@ class PHPInfo
     {
         return ini_get('log_errors');
     }
+
+    public function getMaxExecution()
+    {
+        return ini_get('max_execution_time');
+    }
+
+    public function getMaxInput()
+    {
+        return ini_get('max_input_time');
+    }
+
+    public function getOpcacheMemoryConsumption()
+    {
+        $max_consumption = opcache_get_configuration()['directives']['opcache.memory_consumption'];
+        return sprintf('%s MB ',$max_consumption/1024/1024);
+    }
+
+    public function getOpcacheMaxAcceleratedFiles()
+    {
+        $max_files = opcache_get_configuration()['directives']['opcache.max_accelerated_files'];
+        return sprintf('%s',$max_files);
+    }
+
+    public function getOpcacheValidateTimestamps()
+    {
+        return opcache_get_configuration()['directives']['opcache.validate_timestamps'];
+    }
 }

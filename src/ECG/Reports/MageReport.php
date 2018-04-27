@@ -30,7 +30,6 @@ class MageReport
         $cache = $mage_info->getCache($magedir);
         $pagecache = $mage_info->getPageCache($magedir);
         $cachetype = $mage_info->getCacheType($magedir);
-        //$cachetype = array('config'=>1,'layout'=>1);
 
         $output->writeln('');$output->writeln('');
         $output->writeln('Magento Parameters Table:');

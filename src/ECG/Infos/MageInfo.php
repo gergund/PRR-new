@@ -102,16 +102,43 @@ class MageInfo
 
     }
 
+    protected function returnEmptyCacheType()
+    {
+        $cache_type = array(
+            'config' => 'Unknown',
+            'layout' => 'Unknown',
+            'block_html' => 'Unknown',
+            'collections' => 'Unknown',
+            'reflection' => 'Unknown',
+            'db_ddl' => 'Unknown',
+            'eav' => 'Unknown',
+            'customer_notification' => 'Unknown',
+            'config_integration' => 'Unknown',
+            'config_integration_api' => 'Unknown',
+            'target_rule' => 'Unknown',
+            'full_page' => 'Unknown',
+            'translate' => 'Unknown',
+            'config_webservice' => 'Unknown',
+            'compiled_config' => 'Unknown',
+        );
+        return $cache_type;
+    }
+
     public function getCacheType($magedir)
     {
         $file = $magedir.'/app/etc/env.php';
 
         if (!is_file($file) || !is_readable($file)) {
-            return 'Unknown';
+            return $this->returnEmptyCacheType();
         }
 
         $mage_conf=require($file);
+        if(isset($mage_conf['cache_types']['config']))
+        {
+                    return $mage_conf['cache_types'];
+        }else{
+            return $this->returnEmptyCacheType();
+        }
 
-        return $mage_conf['cache_types'];
     }
 }
