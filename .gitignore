@@ -3,3 +3,6 @@
 /vendor/
 /vendor/*
 composer.lock
+.buildpath
+.project
+.settings/

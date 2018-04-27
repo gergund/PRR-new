@@ -8,8 +8,7 @@
  * Time: 13:50
  */
 
-set_time_limit(0);
-date_default_timezone_set('Europe/Kiev');
+date_default_timezone_set('UTC');
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
