@@ -33,6 +33,21 @@ class CacheInformation implements InformationInterface
         $this->magentoDir = $this->reader->readDataOrNull($config, 'magento_dir');
     }
 
+    /**
+     * Get dataset description.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'Cache Parameters';
+    }
+
+    /**
+     * Get cache configuration data.
+     *
+     * @return array
+     */
     public function getData()
     {
         $data = $this->getCacheConfigTemplate();

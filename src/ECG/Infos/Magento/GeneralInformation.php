@@ -40,6 +40,16 @@ class GeneralInformation implements InformationInterface
     }
 
     /**
+     * Get dataset title.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'Magento Parameters';
+    }
+
+    /**
      * Get version.
      *
      * @return string
