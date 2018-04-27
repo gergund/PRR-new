@@ -21,13 +21,18 @@ class PHPReport
 
         $php_info = new PHPInfo();
         $version = $php_info->getVersion();
-
+        $display_errors = $php_info->getDisplayErrors();
+        $memory_limit = $php_info->getMemoryLimit();
+        $log_errors = $php_info->getLogErrors();
 
         $output->writeln('');$output->writeln('');
         $output->writeln('PHP Parameters Table:');
 
         $table = new Table($output);
         $table->addRow(['PHP Version', $version]);
+        $table->addRow(['Display errors',$display_errors]);
+        $table->addRow(['Memory limit',$memory_limit]);
+        $table->addRow(['Log errors',$log_errors]);
 
 
         $table->render();
