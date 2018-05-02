@@ -40,10 +40,10 @@ class ApplicationRoleAction extends AbstractCommandAction implements ActionInter
     {
         $list = [];
 
-        $list[] = new MagentoGeneralInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
-        $list[] = new MagentoCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
         $list[] = new SystemGeneralInformation();
         $list[] = new PhpInformation();
+        $list[] = new MagentoGeneralInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
+        $list[] = new MagentoCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
 
         return $list;
     }
