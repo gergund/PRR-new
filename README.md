@@ -4,7 +4,7 @@ Performance Review Report Tool
 ```$vendor/bin/phar-builder package composer.json```
 
 >Download app.phar by URL: 
-```$wget https://github.com/gergund/PRR/raw/master/build/app.phar```
+```$wget https://github.com/Magento-ECG-Team/prr/raw/master/build/app.phar```
 
 >Run Performance Review Report tool with UDS: 
 ```$php app.phar collect:data application --magento-dir=/var/www/html/ --php-fpm=unix:///var/run/php/php7.0-fpm.sock```
