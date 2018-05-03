@@ -3,7 +3,8 @@
     "description": "Performance Review Report tool ",
     "require": {
         "symfony/console": "^3.0",
-        "macfja/phar-builder": "^0.2.6"
+        "macfja/phar-builder": "^0.2.6",
+	"adoy/fastcgi-client": "~1.0"
     },
     "autoload": {
         "psr-0": {

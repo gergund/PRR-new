@@ -48,6 +48,14 @@ class CollectCommand extends Command
             'Magento source directory',
             null
         );
+
+        $this->addOption(
+            'php-fpm',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            'PHP-FPM  UDS or TCP socket',
+            null
+        );
     }
 
     /**
@@ -73,6 +81,12 @@ class CollectCommand extends Command
         $magedir = $input->getOption('magento-dir');
         if (is_null($magedir)) {
             $output->writeln('<error>Option: magento-dir is not defined For example: collect:data application --magento-dir=/var/www/html/ </error>');
+        }
+
+        $phpfpm_socket = $input->getOption('php-fpm');
+        if (is_null($phpfpm_socket)) {
+            $output->writeln('<error>Option: php-fpm is not defined For example: collect:data application --magento-dir=/var/www/html/ --php-fpm=unix:/var/run/php-fpm.sock</error>');
+            $output->writeln('<error>Or example: collect:data application --magento-dir=/var/www/html/ --php-fpm=127.0.0.1:9000</error>');
         }
     }
 
