@@ -5,6 +5,9 @@ namespace ECG\Infos\System;
 use ECG\Infos\InformationInterface;
 use ECG\Util\ArrayReader;
 
+use Adoy\FastCGI\Client;
+
+
 class PhpInformation implements InformationInterface
 {
     /**
@@ -147,11 +150,48 @@ EOF;
      */
     private function runTemporaryFile()
     {
-        $cmd = 'vendor/adoy/fastcgi-client/fcgiget.php '.$this->phpfpm_socket.$this->tmpfile.' 2>&1';
-        $content = shell_exec($cmd);
-        $content = trim($content);
+        $url=array(
+            'path' => $this->tmpfile,
+            'query' => $this->tmpfile,
+            'req' => $this->tmpfile,
+            'uri' => $this->tmpfile
+        );
 
-        if (preg_match('/a:7(.+)/', $content, $match) == 1) {
+        $params = array(
+            'GATEWAY_INTERFACE' => 'FastCGI/1.0',
+            'REQUEST_METHOD'    => 'GET',
+            'SCRIPT_FILENAME'   => $url['path'],
+            'SCRIPT_NAME'       => $url['req'],
+            'QUERY_STRING'      => $url['query'],
+            'REQUEST_URI'       => $url['uri'],
+            'DOCUMENT_URI'      => $url['req'],
+            'SERVER_SOFTWARE'   => 'php/fcgiclient',
+            'REMOTE_ADDR'       => '127.0.0.1',
+            'REMOTE_PORT'       => '9985',
+            'SERVER_ADDR'       => '127.0.0.1',
+            'SERVER_PORT'       => '80',
+            'SERVER_NAME'       => php_uname('n'),
+            'SERVER_PROTOCOL'   => 'HTTP/1.1',
+            'CONTENT_TYPE'      => '',
+            'CONTENT_LENGTH'    => 0
+        );
+
+        if (preg_match('/unix:/', $this->phpfpm_socket, $match) == 1) {
+
+            $client = new Client($this->phpfpm_socket, -1);
+
+        }else{
+
+            $host = explode(':',$this->phpfpm_socket)[0];
+            $port = explode(':',$this->phpfpm_socket)[1];
+
+            $client = new Client($host,$port);
+        }
+
+
+        $response = $client->request($params, false)."\n";
+
+        if (preg_match('/a:7(.+)/', $response, $match) == 1) {
 
             $config = unserialize($match[0]);
             $this->phpinfo = $config;
