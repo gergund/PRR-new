@@ -85,7 +85,7 @@ class CollectCommand extends Command
 
         $phpfpm_socket = $input->getOption('php-fpm');
         if (is_null($phpfpm_socket)) {
-            $output->writeln('<error>Option: php-fpm is not defined For example: collect:data application --magento-dir=/var/www/html/ --php-fpm=unix:/var/run/php-fpm.sock</error>');
+            $output->writeln('<error>Option: php-fpm is not defined For example: collect:data application --magento-dir=/var/www/html/ --php-fpm=unix:///var/run/php-fpm.sock</error>');
             $output->writeln('<error>Or example: collect:data application --magento-dir=/var/www/html/ --php-fpm=127.0.0.1:9000</error>');
         }
     }

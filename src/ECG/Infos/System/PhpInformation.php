@@ -49,8 +49,17 @@ class PhpInformation implements InformationInterface
 
         $this->phpfpm_socket = $this->reader->readDataOrNull($config, 'php-fpm');
 
-        $this->Exec();
+        if( !is_null($this->phpfpm_socket)){
+            $this->Exec();
+        }else{
 
+            $this->phpinfo['PHP Version'] = 'Unknown';
+            $this->phpinfo['Display Errors'] = 'Unknown' ;
+            $this->phpinfo['Memory Limit'] = 'Unknown';
+            $this->phpinfo['Log Errors'] = 'Unknown';
+            $this->phpinfo['Max Execution Time'] = 'Unknown';
+            $this->phpinfo['Max Input Time'] = 'Unknown';
+        }
     }
 
     /**
