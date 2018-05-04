@@ -97,6 +97,7 @@ class PhpInformation implements InformationInterface
         $data['Max Execution Time'] = $this->phpinfo['Max Execution Time'] ;
         $data['Max Input Time'] = $this->phpinfo['Max Input Time'];
         $data['OpCache Memory Consumption'] = $this->getOpcacheMemoryConsumption();
+        $data['OpCache Memory Usage'] = sprintf('%s MB',$this->phpinfo['OpCache Memory Usage']);
         $data['OpCache Max Accelerated Files'] = $this->getOpcacheMaxAcceleratedFiles();
         $data['OpCache Validate Timestamps'] = $this->getOpcacheValidateTimestamps();
 
@@ -142,6 +143,7 @@ class FCGIInformation
         $data['Error Log File'] = ini_get('error_log');
         $data['Max Execution Time'] = ini_get('max_execution_time');
         $data['Max Input Time'] = ini_get('max_input_time');
+        $data['OpCache Memory Usage'] = round(opcache_get_status()['memory_usage']['used_memory']/1024/1024); 
 
         print (serialize($data));
     }
@@ -206,7 +208,7 @@ EOF;
 
         $response = $client->request($params, false)."\n";
 
-        if (preg_match('/a:7(.+)/', $response, $match) == 1) {
+        if (preg_match('/a:8(.+)/', $response, $match) == 1) {
 
             $config = unserialize($match[0]);
             $this->phpinfo = $config;
@@ -232,7 +234,7 @@ EOF;
         return $result;
     }
 
-     /**
+    /**
      * Get OpCache memory consumption.
      *
      * @return string
