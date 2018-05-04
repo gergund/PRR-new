@@ -57,6 +57,7 @@ class PhpInformation implements InformationInterface
             $this->phpinfo['Display Errors'] = 'Unknown' ;
             $this->phpinfo['Memory Limit'] = 'Unknown';
             $this->phpinfo['Log Errors'] = 'Unknown';
+            $this->phpinfo['Error Log File'] = 'Unknown';
             $this->phpinfo['Max Execution Time'] = 'Unknown';
             $this->phpinfo['Max Input Time'] = 'Unknown';
         }
@@ -85,9 +86,14 @@ class PhpInformation implements InformationInterface
         $data = [];
 
         $data['PHP Version'] = $this->phpinfo['PHP Version'];
+        $data['PHP Modules'] = $this->getPHPModules(1);
+        $data[' '] = $this->getPHPModules(2);
+        $data['  '] = $this->getPHPModules(3);
+        $data['   '] = $this->getPHPModules(4);
         $data['Display Errors'] = $this->phpinfo['Display Errors'] ;
         $data['Memory Limit'] = $this->phpinfo['Memory Limit'];
         $data['Log Errors'] = $this->phpinfo['Log Errors'];
+        $data['Error Log File'] = $this->phpinfo['Error Log File'];
         $data['Max Execution Time'] = $this->phpinfo['Max Execution Time'] ;
         $data['Max Input Time'] = $this->phpinfo['Max Input Time'];
         $data['OpCache Memory Consumption'] = $this->getOpcacheMemoryConsumption();
@@ -207,6 +213,23 @@ EOF;
         }
 
         unlink($this->tmpfile);
+    }
+
+    /**
+     * Get PHP modules list.
+     *
+     * @return string
+     */
+    private function getPHPModules($rows)
+    {
+        $begin=0;$length=140;
+        for($i=1;$i<=$rows;$i++)
+        {
+            $result = substr(implode(", ", get_loaded_extensions()),$begin,$length);
+            $begin=$begin+$length;
+        }
+
+        return $result;
     }
 
      /**
