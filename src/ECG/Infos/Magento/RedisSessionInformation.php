@@ -93,6 +93,10 @@ class RedisSessionInformation implements InformationInterface
         $data = [];
 
         $data['Redis Version'] = $this->redisinfo['redis_version'];
+        $data['Used Memory'] = sprintf('%s MB', round($this->redisinfo['used_memory']/1024/1024));
+        $data['Used Memory Peak'] = sprintf('%s MB', round($this->redisinfo['used_memory_peak']/1024/1024));
+        $data['Expired keys'] = $this->redisinfo['expired_keys'];
+        $data['Evicted keys'] = $this->redisinfo['evicted_keys'];
 
         return $data;
     }
@@ -120,6 +124,10 @@ class RedisSessionInformation implements InformationInterface
     private function returnEmptyRedisInfo()
     {
         $this->redisinfo['redis_version'] = 'Unknown';
+        $this->redisinfo['used_memory'] = 'Unknown';
+        $this->redisinfo['used_memory_peak'] = 'Unknown';
+        $this->redisinfo['expired_keys'] = 'Unknown';
+        $this->redisinfo['evicted_keys'] = 'Unknown';
     }
 
 }
