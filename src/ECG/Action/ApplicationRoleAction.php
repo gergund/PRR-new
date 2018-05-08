@@ -2,6 +2,7 @@
 
 namespace ECG\Action;
 
+use ECG\Infos\Magento\RedisSessionInformation;
 use Symfony\Component\Console\Helper\Table;
 
 use ECG\Infos\Magento\GeneralInformation as MagentoGeneralInformation;
@@ -44,6 +45,7 @@ class ApplicationRoleAction extends AbstractCommandAction implements ActionInter
         $list[] = new PhpInformation(['php-fpm' => $this->getInput()->getOption('php-fpm')]);
         $list[] = new MagentoGeneralInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
         $list[] = new MagentoCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
+        $list[] = new RedisSessionInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
 
         return $list;
     }

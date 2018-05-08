@@ -4,7 +4,8 @@
     "require": {
         "symfony/console": "^3.0",
         "macfja/phar-builder": "^0.2.6",
-	"adoy/fastcgi-client": "~1.0"
+	"adoy/fastcgi-client": "~1.0",
+        "colinmollenhour/credis": "^1.9"
     },
     "autoload": {
         "psr-0": {
