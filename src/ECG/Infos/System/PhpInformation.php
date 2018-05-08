@@ -60,6 +60,7 @@ class PhpInformation implements InformationInterface
             $this->phpinfo['Error Log File'] = 'Unknown';
             $this->phpinfo['Max Execution Time'] = 'Unknown';
             $this->phpinfo['Max Input Time'] = 'Unknown';
+            $this->phpinfo['OpCache Memory Usage'] = 'Unknown';
         }
     }
 
