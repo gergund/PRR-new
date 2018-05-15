@@ -13,7 +13,7 @@ use ECG\Util\ArrayReader;
 
 use Credis_Client;
 
-class RedisSessionInformation implements InformationInterface
+class RedisCacheInformation implements InformationInterface
 {
 
     /**
@@ -80,7 +80,7 @@ class RedisSessionInformation implements InformationInterface
      */
     public function getName()
     {
-        return 'Redis Session Configuration';
+        return 'Redis Cache Configuration';
     }
 
     /**
@@ -106,11 +106,11 @@ class RedisSessionInformation implements InformationInterface
         $envFilePath = $this->magentoDir . '/app/etc/env.php';
         $envConfig = include($envFilePath);
 
-        if (isset($envConfig['session']['redis']))
+        if (isset($envConfig['cache']['frontend']['default']['backend_options']))
         {
             $this->redis_socket = array(
-                'host' => $envConfig['session']['redis']['host'],
-                'port' => $envConfig['session']['redis']['port']
+                'host' => $envConfig['cache']['frontend']['default']['backend_options']['server'],
+                'port' => $envConfig['cache']['frontend']['default']['backend_options']['port']
                 );
         }
     }

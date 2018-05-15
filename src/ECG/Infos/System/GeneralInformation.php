@@ -31,7 +31,7 @@ class GeneralInformation implements InformationInterface
      */
     public function getName()
     {
-        return 'System Parameters';
+        return 'System (OS) Configuration';
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace ECG\Action;
 
+use ECG\Infos\Magento\RedisCacheInformation;
+use ECG\Infos\Magento\RedisPageCacheInformation;
 use ECG\Infos\Magento\RedisSessionInformation;
 use Symfony\Component\Console\Helper\Table;
 
@@ -46,6 +48,8 @@ class ApplicationRoleAction extends AbstractCommandAction implements ActionInter
         $list[] = new MagentoGeneralInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
         $list[] = new MagentoCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
         $list[] = new RedisSessionInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
+        $list[] = new RedisCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
+        $list[] = new RedisPageCacheInformation(['magento_dir' => $this->getInput()->getOption('magento-dir')]);
 
         return $list;
     }

@@ -40,7 +40,7 @@ class CacheInformation implements InformationInterface
      */
     public function getName()
     {
-        return 'Cache Parameters';
+        return 'Magento Cache Configuration';
     }
 
     /**

@@ -46,7 +46,7 @@ class GeneralInformation implements InformationInterface
      */
     public function getName()
     {
-        return 'Magento Parameters';
+        return 'Magento General Configuration';
     }
 
     /**

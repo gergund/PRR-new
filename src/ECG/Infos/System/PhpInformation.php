@@ -71,7 +71,7 @@ class PhpInformation implements InformationInterface
      */
     public function getName()
     {
-        return 'PHP Parameters';
+        return 'PHP Configuration';
     }
 
     /**
