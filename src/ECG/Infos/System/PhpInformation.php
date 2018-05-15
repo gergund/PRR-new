@@ -91,6 +91,7 @@ class PhpInformation implements InformationInterface
         $data[' '] = $this->getPHPModules(2);
         $data['  '] = $this->getPHPModules(3);
         $data['   '] = $this->getPHPModules(4);
+        $data['    '] = $this->getPHPModules(5);
         $data['Display Errors'] = $this->phpinfo['Display Errors'] ;
         $data['Memory Limit'] = $this->phpinfo['Memory Limit'];
         $data['Log Errors'] = $this->phpinfo['Log Errors'];
@@ -225,7 +226,7 @@ EOF;
      */
     private function getPHPModules($rows)
     {
-        $begin=0;$length=140;
+        $begin=0;$length=115;
         for($i=1;$i<=$rows;$i++)
         {
             $result = substr(implode(", ", get_loaded_extensions()),$begin,$length);
