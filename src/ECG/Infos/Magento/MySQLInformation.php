@@ -110,6 +110,7 @@ class MySQLInformation implements InformationInterface
         $data['Threads Connected'] = $this->mysql_status_info['Threads_connected'];
         $data['Max Connect Errors'] = $this->mysqlinfo['max_connect_errors'];
         $data['Aborted Connections'] = $this->mysql_status_info['Aborted_connects'];
+        $data['Aborted Clients'] = $this->mysql_status_info['Aborted_clients'];
         $data['Max Allowed Packet'] =  sprintf('%s MB',round($this->mysqlinfo['max_allowed_packet']/1024/1024));
 
         return $data;
@@ -165,6 +166,7 @@ class MySQLInformation implements InformationInterface
         $this->mysql_status_info['Max_used_connections'] = 'Unknown';
         $this->mysql_status_info['Threads_connected'] = 'Unknown';
         $this->mysql_status_info['Aborted_connects'] = 'Unknown';
+        $this->mysql_status_info['Aborted_clients'] = 'Unknown';
 
     }
 
