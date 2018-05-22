@@ -102,9 +102,11 @@ class MySQLInformation implements InformationInterface
         $data = [];
 
         $data['InnoDB Buffer Pool Size'] = sprintf('%s MB',round($this->mysqlinfo['innodb_buffer_pool_size']/1024/1024));
+        $data['InnoDB Buffer Pool Pages Free'] = $this->mysql_status_info['Innodb_buffer_pool_pages_free'];
         $data['InnoDB Data and Index Size'] = $this->InnoDBDataIndexSize();
         $data['Query Cache Size'] = sprintf('%s MB',round($this->mysqlinfo['query_cache_size']/1024/1024));
         $data['Query Cache Limit'] = sprintf('%s MB',round($this->mysqlinfo['query_cache_limit']/1024/1024));
+        $data['Query Cache Hits'] = $this->mysql_status_info['Qcache_hits'];
         $data['Max Connections'] = $this->mysqlinfo['max_connections'];
         $data['Max Used Connections'] = $this->mysql_status_info['Max_used_connections'];
         $data['Threads Connected'] = $this->mysql_status_info['Threads_connected'];
@@ -112,6 +114,7 @@ class MySQLInformation implements InformationInterface
         $data['Aborted Connections'] = $this->mysql_status_info['Aborted_connects'];
         $data['Aborted Clients'] = $this->mysql_status_info['Aborted_clients'];
         $data['Max Allowed Packet'] =  sprintf('%s MB',round($this->mysqlinfo['max_allowed_packet']/1024/1024));
+        $data['MySQL uptime'] = $this->mysql_status_info['Uptime'];
 
         return $data;
     }
@@ -167,6 +170,9 @@ class MySQLInformation implements InformationInterface
         $this->mysql_status_info['Threads_connected'] = 'Unknown';
         $this->mysql_status_info['Aborted_connects'] = 'Unknown';
         $this->mysql_status_info['Aborted_clients'] = 'Unknown';
+        $this->mysql_status_info['Uptime'] = 'Unknown';
+        $this->mysql_status_info['Qcache_hits'] = 'Unknown';
+        $this->mysql_status_info['Innodb_buffer_pool_pages_free'] = 'Unknown';
 
     }
 
