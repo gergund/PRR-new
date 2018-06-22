@@ -61,6 +61,8 @@ class PhpInformation implements InformationInterface
             $this->phpinfo['Max Execution Time'] = 'Unknown';
             $this->phpinfo['Max Input Time'] = 'Unknown';
             $this->phpinfo['OpCache Memory Usage'] = 'Unknown';
+            $this->phpinfo['OpCache Cached Keys'] = 'Unknown';
+            $this->phpinfo['OpCache Max Cached Keys'] = 'Unknown';
         }
     }
 
@@ -100,6 +102,8 @@ class PhpInformation implements InformationInterface
         $data['Max Input Time'] = $this->phpinfo['Max Input Time'];
         $data['OpCache Memory Consumption'] = $this->getOpcacheMemoryConsumption();
         $data['OpCache Memory Usage'] = sprintf('%s MB',$this->phpinfo['OpCache Memory Usage']);
+        $data['OpCache Cached Keys'] = $this->phpinfo['OpCache Cached Keys'];
+        $data['OpCache Max Cached Keys'] = $this->phpinfo['OpCache Max Cached Keys'];
         $data['OpCache Max Accelerated Files'] = $this->getOpcacheMaxAcceleratedFiles();
         $data['OpCache Validate Timestamps'] = $this->getOpcacheValidateTimestamps();
 
@@ -145,7 +149,9 @@ class FCGIInformation
         $data['Error Log File'] = ini_get('error_log');
         $data['Max Execution Time'] = ini_get('max_execution_time');
         $data['Max Input Time'] = ini_get('max_input_time');
-        $data['OpCache Memory Usage'] = round(opcache_get_status()['memory_usage']['used_memory']/1024/1024); 
+        $data['OpCache Memory Usage'] = round(opcache_get_status()['memory_usage']['used_memory']/1024/1024);
+        $data['OpCache Cached Keys'] = opcache_get_status()['opcache_statistics']['num_cached_keys']; 
+        $data['OpCache Max Cached Keys'] = opcache_get_status()['opcache_statistics']['max_cached_keys'];
 
         print (serialize($data));
     }
@@ -210,7 +216,7 @@ EOF;
 
         $response = $client->request($params, false)."\n";
 
-        if (preg_match('/a:8(.+)/', $response, $match) == 1) {
+        if (preg_match('/a:10(.+)/', $response, $match) == 1) {
 
             $config = unserialize($match[0]);
             $this->phpinfo = $config;
