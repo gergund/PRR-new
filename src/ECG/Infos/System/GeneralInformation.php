@@ -45,19 +45,18 @@ class GeneralInformation implements InformationInterface
 
         $data['Platform'] = $this->getPlatform();
         $data['Release'] = $this->getRelease();
+        $data['Kernel'] = $this->getKernel();
         $data['OS Architecture'] = $this->getSystemArchitecture();
         $data['CPU Architecture'] = $this->getHardwareArchitecture();
         $data['Threading'] = $this->getThreading();
         $data['Compiler'] = $this->getCompiler();
-        $data['Kernel'] = $this->getKernel();
-        $data['Hostname'] = $this->getHostname();
         $data['SE Linux'] = $this->getSelinux();
         $data['Virtualization'] = $this->getVirtualized();
         $data['Processors'] = $this->getProcessors();
         $data['CPU Model'] = $this->getCpuModel();
         $data['Memory'] = $this->getMemory();
         $data['HTTP Server'] = $this->getHttpServer();
-
+        $data['Hostname'] = $this->getHostname();
         return $data;
     }
 
